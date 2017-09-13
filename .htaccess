@@ -1,0 +1,23 @@
+php_value include_path ".:/usr/share/pear:/usr/share/php:includes:../includes:../../includes:../../../includes:../../../../includes"
+php_flag display_startup_errors on
+php_value session.save_path "/tmp"
+php_value "date.timezone" "America/New_York"
+php_flag ignore_repeated_errors off
+php_flag ignore_repeated_source off
+php_flag report_memleaks on
+php_flag track_errors on
+php_value docref_root 0
+php_value docref_ext 0
+php_value error_reporting -1
+#php_flag display_errors on
+php_flag log_errors on
+php_value error_log /afs/umbc.edu/public/virthost/sites/appsga/private/data_error_log
+
+RewriteEngine  on
+RewriteBase /
+RewriteCond %{REQUEST_METHOD} ^TRACE
+RewriteRule .* - [F]
+
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_USER_AGENT} !iTunes
+RewriteRule ^(.*)$ https://%{SERVER_NAME}/finance-tools$1 [R,L]
